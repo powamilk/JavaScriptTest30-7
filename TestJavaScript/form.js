@@ -42,3 +42,58 @@ function updateShippingFee() {
     }
     updateTotal();
 }
+
+// Hiển thị tổng tiền khi nhấn nút "Đặt Mua"
+document.getElementById('orderForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Ngăn không gửi form
+
+    // Xóa thông báo lỗi cũ
+    const errorCustommerName = document.getElementById('error-custommerName');
+    const errorItemType = document.getElementById('error-itemType');
+    const errorQuantity = document.getElementById('error-quantity');
+    const errorRegion = document.getElementById('error-region');
+
+    errorCustommerName.style.display = 'none';
+    errorItemType.style.display = 'none';
+    errorQuantity.style.display = 'none';
+    errorRegion.style.display = 'none';
+
+    // Kiểm tra tất cả các trường thông tin
+    const custommerName = document.getElementById('custommerName').value.trim();
+    const itemType = document.getElementById('itemType').value;
+    const quantity = document.getElementById('quantity').value.trim();
+    const region = document.querySelector('input[name="region"]:checked');
+
+    let hasError = false;
+
+    if (!custommerName) {
+        errorCustommerName.style.display = 'block';
+        hasError = true;
+    }
+
+    if (!itemType) {
+        errorItemType.style.display = 'block';
+        hasError = true;
+    }
+
+    if (!quantity) {
+        errorQuantity.style.display = 'block';
+        hasError = true;
+    }
+
+    if (!region) {
+        errorRegion.style.display = 'block';
+        hasError = true;
+    }
+
+    if (hasError) {
+        return; // Dừng lại không gửi form
+    }
+
+    // Hiển thị tổng tiền
+    const totalPriceField = document.getElementById('totalPrice');
+    totalPriceField.style.display = 'block';
+
+    // Tính toán tổng tiền
+    updateTotal();
+});

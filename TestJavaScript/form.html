@@ -3,40 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoas don </title>
+    <title>Hoas don</title>
+    <style>
+        .error-message {
+            color: red;
+            margin-top: 5px;
+            display: none; 
+        }
+    </style>
 </head>
 <body>
     <h1>Form Hóa Đơn</h1>
 
-    <form>
+    <form id="orderForm">
+        <!-- Khách Hàng -->
         <label for="custommerName">Khách Hàng</label>
-        <input type="text" id="custommerName" name="custommerName" required><br><br>
+        <input type="text" id="custommerName" name="custommerName"><br>
+        <div id="error-custommerName" class="error-message">Vui lòng nhập tên khách hàng.</div><br><br>
 
+        <!-- Loại Hàng -->
         <label for="itemType">Loại Hàng</label>
-        <select name="itemType" id="itemType" onchange="updatePrice()" required>
+        <select name="itemType" id="itemType" onchange="updatePrice()">
             <option value="" disabled selected>Chọn loại hàng</option>
             <option value="1">Loại 1</option>
             <option value="2">Loại 2</option>
             <option value="3">Loại 3</option>
-        </select><br><br>
+        </select>
+        <div id="error-itemType" class="error-message">Vui lòng chọn loại hàng.</div><br><br>
 
+        <!-- Số Lượng -->
         <label for="quantity">Số Lượng</label>
-        <input type="number" name="quantity" id="quantity" min="1" oninput="updateTotal()" required><br><br>
+        <input type="number" name="quantity" id="quantity" min="1" oninput="updateTotal()"><br>
+        <div id="error-quantity" class="error-message">Vui lòng nhập số lượng.</div><br><br>
 
+        <!-- Đơn Giá -->
         <label for="price">Đơn Giá</label>
         <input type="text" id="price" name="price" readonly><br><br>
 
+        <!-- Phí Vận Chuyển -->
         <label for="shippingFee">Phí Vận Chuyển</label>
         <input type="text" id="shippingFee" name="shippingFee" readonly><br><br>
 
+        <!-- Thành Tiền -->
         <label for="totalPrice">Thành Tiền</label>
-        <input type="text" id="totalPrice" name="totalPrice" readonly><br><br>
+        <input type="text" id="totalPrice" name="totalPrice" readonly style="display: none;"><br><br>
 
+        <!-- Nơi Vận Chuyển -->
         <label>Nơi Vận Chuyển</label>
-        <input type="radio" name="region" id="innerCity" value="inner" onchange="updateShippingFee()" required>
+        <input type="radio" name="region" id="innerCity" value="inner" onchange="updateShippingFee()">
         <label for="innerCity">Nội Thành</label>
-        <input type="radio" name="region" id="outerCity" value="outer" onchange="updateShippingFee()" required>
+        <input type="radio" name="region" id="outerCity" value="outer" onchange="updateShippingFee()">
         <label for="outerCity">Ngoại Thành</label>
+        <div id="error-region" class="error-message">Vui lòng chọn nơi vận chuyển.</div><br><br>
 
         <button type="submit">Đặt Mua</button>
     </form>
